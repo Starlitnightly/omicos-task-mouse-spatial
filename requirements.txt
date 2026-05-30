@@ -1,0 +1,10 @@
+scanpy>=1.10
+anndata>=0.10
+numpy
+pandas
+scipy
+matplotlib
+seaborn
+marsilea>=0.5
+omicverse
+gsMap

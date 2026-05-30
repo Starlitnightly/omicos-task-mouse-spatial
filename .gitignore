@@ -1,0 +1,51 @@
+# AnnData / h5ad files
+*.h5ad
+*.h5ad.gz
+
+# Large data directories
+data/
+models/
+gsMap_output/
+
+# Python bytecode
+__pycache__/
+*.pyc
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# OS clutter
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+.venv/
+env/
+
+# Editor
+.vscode/
+.idea/
+
+# Log files
+*.log
+
+# Compiled LaTeX
+*.aux
+*.pdf
+!figures/**/*.pdf
+
+# Local caches
+.cache/
+*.cache
+
+# === Private — do NOT publish ===
+# Conversation transcripts and trajectory (contain Claude Code CLI references
+# and full agent thinking traces). These stay local until rebranding is complete.
+TRAJECTORY.md
+TRAJECTORY_RAW.md
+docs/conversation_walkthrough.md
+
+# Memory dumps (host-local agent state)
+.claude/
+.omicos/
