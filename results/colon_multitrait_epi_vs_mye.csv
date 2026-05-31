@@ -1,0 +1,9 @@
+trait,colon_myeloid_logp,colon_epithelial_logp,epi_minus_mye_logp,colon_epi_dominant
+AD,4.422,6.333,1.911,True
+PD,1.072,2.646,1.573,True
+ALS,2.731,5.003,2.272,True
+MS,3.307,4.854,1.547,True
+FTD,0.135,0.587,0.452,True
+T2D,1.891,5.477,3.585,True
+SCZ,3.19,5.123,1.932,True
+Height,4.85,14.676,9.825,True
