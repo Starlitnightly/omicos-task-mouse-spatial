@@ -49,3 +49,6 @@ docs/conversation_walkthrough.md
 # Memory dumps (host-local agent state)
 .claude/
 .omicos/
+
+# scVI integrated atlas (271 MB, too large for git; rebuild via paper_figure_exsupp.ipynb)
+results/burclaff_smillie_scvi_integrated*.h5ad
