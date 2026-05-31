@@ -1,0 +1,7 @@
+topic,note
+gsMap input,"Each (organ × age × source) CMap-projected h5ad in the multi-age atlas (Supplementary Table Mouse 1) was scored with `gsmap quick_mode` against the Bellenguez 2022 AD GWAS, producing a per-spot S-LDSC χ² statistic and p-value."
+Median log10(p) metric,Per-organ × per-age 'median_logp' is the spot-level median of -log10(p_AD). Higher = stronger per-spot AD heritability enrichment in that organ-age stratum. q25 and q75 give the 25th/75th percentiles to show the spread.
+Genome-wide significance fraction,frac_genomewide_sig = fraction of spots with p_AD < 5×10⁻⁸. Conservative; complements the median by capturing the tail.
+Why n_spots_total ≠ n_spots_pAD_valid,A small number of spots (~1%) fail gsMap S-LDSC (no LDSC score in the chunk they fell into); we list both for transparency. Median and percentiles use only valid spots.
+Age-group definitions,"Young = age_months ≤ 6 (1, 3, 6 mo); Mid = 6 < age_months < 18 (12, 16 mo); Old = age_months ≥ 18 (18, 21, 23, 24, 30 mo). Young and Old definitions match the Young/Old comparison in Fig. 4e and the paragraph S2 reference numbers (264,283 young spots / 41 samples; 322,477 old spots / 62 samples)."
+Sample-sample variability,"n_samples in each (organ × age) cell is the number of CMap-projected samples (= h5ad files) feeding gsMap. The same organ-age can have >1 sample from different single-cell sources (see Supplementary Table Mouse 1, Section 3)."

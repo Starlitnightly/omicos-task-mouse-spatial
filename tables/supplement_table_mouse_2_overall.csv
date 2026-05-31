@@ -1,0 +1,4 @@
+age_group,n_samples,n_spots_total,n_spots_pAD_valid,median_logp,q25_logp,q75_logp,frac_genomewide_sig
+Young (≤6 mo),41,264283,261598,1.186,0.391,2.432,0.006
+Mid (6–18 mo),23,222524,221202,1.197,0.532,2.06,0.001
+Old (≥18 mo),62,322477,319643,2.115,1.012,3.439,0.008
