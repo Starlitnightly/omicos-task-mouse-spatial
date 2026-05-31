@@ -1,0 +1,11 @@
+gene,pathway,colon_n_eQTL,brain_n_eQTL,blood_n_eQTL,liver_n_eQTL,colon_best_p,ad_snp_is_colon_eQTL
+ADAM10,APP,345,14,27,0,8.72697e-10,False
+CD2AP,APP,200,69,98,0,1.55928e-06,True
+BIN1,Myeloid,192,73,250,29,3.19881e-22,False
+PICALM,APP,93,0,59,0,2.4864e-09,False
+APP,APP,28,3,249,0,5.99202e-07,False
+CR1,APP,24,38,4,0,4.60457e-07,True
+PSEN1,APP,0,1,250,210,,False
+SORL1,APP,0,0,0,0,,False
+SPI1,Myeloid,0,0,0,0,,False
+TREM2,Myeloid,0,0,0,0,,False
