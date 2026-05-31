@@ -1,0 +1,8 @@
+gene,r_vs_epi,r_vs_mye,preference
+PICALM,0.316,0.125,EPI-leaning
+CD2AP,0.502,0.037,EPI-leaning
+ADAM10,0.22,0.07,EPI-leaning
+CR1,-0.114,0.046,mixed / weak
+APP,0.623,0.075,EPI-leaning
+SORL1,0.283,0.025,EPI-leaning
+PSEN1,0.243,0.056,EPI-leaning
