@@ -1,0 +1,8 @@
+gene,tissue,tissue_short,sig_only_PP_H4,full_summary_PP_H4,change,survived_threshold_0p8
+PICALM,Colon_Transverse,Transverse,0.1525,0.0001,-0.1524,False
+PICALM,Colon_Sigmoid,Sigmoid,0.8789,0.0,-0.8789,False
+APP,Colon_Transverse,Transverse,0.1993,0.0019,-0.1974,False
+APP,Colon_Sigmoid,Sigmoid,0.2006,0.0982,-0.1024,False
+ADAM10,Colon_Transverse,Transverse,0.8661,0.0003,-0.8658,False
+ADAM10,Colon_Sigmoid,Sigmoid,0.8357,0.0004,-0.8353,False
+CR1,Colon_Sigmoid,Sigmoid,0.9923,0.9925,0.0002,True
