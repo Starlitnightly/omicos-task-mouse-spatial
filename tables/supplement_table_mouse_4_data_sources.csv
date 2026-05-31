@@ -1,0 +1,8 @@
+data_source,citation,accession,url,version_snapshot,derived_path_in_repo,notes
+GTEx Portal v8 eQTL query,GTEx Consortium Science 2020,v8,https://gtexportal.org/home/,queried 2026-04 (snapshot),results/gtex_eqtl_query_results.csv,Per (gene × tissue) significant cis-eQTL counts + best p + AD-SNP-is-eQTL flag
+Bellenguez 2022 AD GWAS,Bellenguez et al. Nat Genet 2022,GCST90027158,https://www.ebi.ac.uk/gwas/studies/GCST90027158,2022-04 (GRCh38),data/gwas/Bellenguez2022_AD_withN.tsv.gz (gitignored),AD GWAS lead SNPs per locus
+coloc-ABF (full summary stats),Giambartolomei et al. PLoS Genet 2014,-,https://github.com/chr1swallace/coloc,coloc v5.x,results/coloc_FULL_eqtl_results.csv,Single-causal coloc using full eQTL summary stats; PP.H0–H4 per (gene × colon tissue)
+SharePro multi-causal coloc,Zhang et al. Genome Biol 2023,-,https://github.com/zhwm/SharePro_coloc,SharePro v5.0.0,results/sharepro/{GENE}_v3_result.sharepro.txt,"Multi-causal shared-component coloc; produces ""share"" probability per credible set"
+SMR + HEIDI,Zhu et al. Nat Genet 2016,-,https://yanglab.westlake.edu.cn/software/smr/,SMR v1.3.1,results/smr_colon_AD_results.csv,Summary-data-based Mendelian Randomization with HEIDI heterogeneity test
+Pipeline notebook,This work,-,-,-,notebooks/21_eqtl_coloc_analysis.ipynb (+ _executed),Orchestrates GTEx query + coloc-ABF + SharePro + SMR for the 8 focal genes
+Comparison data: sig-only vs full,Supplementary Fig (Para 5 S4),-,-,-,results/coloc_sig_vs_full_comparison.csv,Sister CSV showing PP.H4 drop when switching from sig-only to full summary

@@ -1,0 +1,2 @@
+cs	share	variantProb
+s1840	0.9977	1.0

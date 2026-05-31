@@ -1,0 +1,9 @@
+gene,GTEx_colon_n_eQTL,GTEx_colon_best_p,AD_SNP_is_colon_eQTL,coloc_ABF_best_PP_H4,coloc_ABF_best_PP_H3,SharePro_share,SMR_best_p,HEIDI_p_at_best_SMR,passes_coloc_ABF,passes_SharePro,passes_SMR,passes_HEIDI,missing_analyses,verdict
+CR1,24,4.60e-07,Yes,0.9925,0.3416,0.9991,2.07e-06,0.00e+00,✓,✓,✓,—,(complete),✓✓ shared-causal (coloc + SharePro)
+PICALM,93,2.49e-09,No,0.0001,0.9995,0.9977,1.34e-03,0.00e+00,—,✓,✓,—,(complete),✓ shared-causal (multi-causal SharePro rescue)
+CD2AP,200,1.56e-06,Yes,,,,,,—,—,—,—,"SharePro, coloc-ABF, SMR/HEIDI",REQUIRES FOLLOW-UP: AD GWAS SNP overlaps a colon eQTL but multi-causal SharePro not yet run (SharePro + coloc-ABF + SMR/HEIDI missing)
+ADAM10,345,8.73e-10,No,0.0004,0.9996,0.0005,4.00e-04,0.00e+00,—,—,✓,—,(complete),colon eQTL present but no coloc / SharePro / SMR support
+APP,28,5.99e-07,No,0.0982,0.9621,,1.48e-02,1.47e-129,—,—,—,—,SharePro,REQUIRES FOLLOW-UP: has colon eQTL but missing SharePro
+SORL1,0,,No,0.0514,0.1161,,4.22e-01,2.61e-43,—,—,—,—,SharePro,no colon eQTL
+PSEN1,0,,No,0.037,0.0388,,1.49e-02,4.28e-17,—,—,—,—,SharePro,no colon eQTL
+BIN1,192,3.20e-22,No,0.0,1.0,,,,—,—,—,—,"SharePro, SMR/HEIDI",REQUIRES FOLLOW-UP: has colon eQTL but missing SharePro + SMR/HEIDI

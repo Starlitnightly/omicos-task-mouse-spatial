@@ -1,0 +1,2 @@
+cs	share	variantProb
+s1249	0.0005	1.0
