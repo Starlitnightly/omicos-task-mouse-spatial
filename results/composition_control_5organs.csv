@@ -1,0 +1,6 @@
+organ,n_total_spots,n_myeloid,pct_myeloid,n_epithelial,pct_epithelial,myeloid_best_logp,epithelial_best_logp,epi_minus_mye_logp
+Brain,72929,25836,35.43,138,0.19,8.357,0.035,-8.322
+Lung,75282,22340,29.68,17661,23.46,9.106,5.569,-3.537
+Liver,58149,6490,11.16,40820,70.2,8.057,4.925,-3.131
+Stomach,74115,1771,2.39,4057,5.47,5.403,1.598,-3.806
+Colon,70198,1755,2.5,42746,60.89,4.422,6.333,1.911
