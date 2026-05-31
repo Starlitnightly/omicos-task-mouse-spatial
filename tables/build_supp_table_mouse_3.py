@@ -292,6 +292,65 @@ with open(OUT / "supplement_table_mouse_3.md", "w") as f:
     f.write(f"- CD2AP and CR1: AD GWAS lead SNP overlaps with a colon eQTL (ad_snp_is_colon_eQTL = True) — "
             "direct evidence that the AD-risk variant could mediate effect via colon expression of these genes.\n")
 
+
+# ------------------------------------------------------------
+# Data sources (auto-appended to CSV / XLSX / DOCX / MD)
+# ------------------------------------------------------------
+DATA_SOURCES_ROWS = [
+    ('GTEx Portal v8 eQTL query', 'GTEx Consortium Science 2020', 'v8', 'https://gtexportal.org/home/', 'queried 2026-04 (snapshot)', 'results/gtex_eqtl_query_results.csv', 'Per (gene × tissue): n_eqtl (significant single-tissue cis-eQTLs at GTEx FDR), best_p, and ad_snp_is_eqtl flag for the Bellenguez 2022 AD GWAS lead SNP'),
+    ('Bellenguez 2022 AD GWAS', 'Bellenguez et al. Nat Genet 2022', 'GCST90027158', 'https://www.ebi.ac.uk/gwas/studies/GCST90027158', '2022-04 (GRCh38)', 'data/gwas/Bellenguez2022_AD_withN.tsv.gz (gitignored)', 'Used to identify AD GWAS lead SNPs per locus and to test for eQTL overlap'),
+    ('SMR colocalisation pipeline', 'Zhu et al. Nat Genet 2016 (SMR/HEIDI)', '-', 'https://yanglab.westlake.edu.cn/software/smr/', 'v1.3.1', 'results/smr_colon_AD_results.csv', 'Provides lead_snp (top-eQTL SNP per gene × tissue), n_tested variants, SMR effect size, HEIDI p. Lead-SNP column in this table is sourced here.'),
+    ('Pipeline notebook', 'This work', '-', '-', '-', 'notebooks/21_eqtl_coloc_analysis.ipynb (also _executed.ipynb)', 'Runs the GTEx query + SMR for the 10 AD candidate genes'),
+    ('Coloc-ABF + SharePro', 'Giambartolomei 2014; Zhang Genome Biol 2023', '-', 'https://github.com/zhwm/SharePro_coloc', 'SharePro v5.0.0', 'results/coloc_FULL_eqtl_results.csv + results/sharepro/{GENE}_v3_result.sharepro.txt', 'Used in Fig. 4 main analysis; not directly in this table but cross-references the AD-SNP overlap calls'),
+]
+DATA_SOURCES_COLS = ['data_source','citation','accession','url','version_snapshot','derived_path_in_repo','notes']
+df_sources = pd.DataFrame(DATA_SOURCES_ROWS, columns=DATA_SOURCES_COLS)
+df_sources.to_csv(OUT / 'supplement_table_mouse_3_data_sources.csv', index=False)
+
+# Add as new sheet in xlsx
+from openpyxl import load_workbook as _lw
+from openpyxl.styles import Font as _F, PatternFill as _P, Alignment as _A
+wb_ = _lw(str(OUT / 'supplement_table_mouse_3.xlsx'))
+if 'Data Sources' in wb_.sheetnames:
+    del wb_['Data Sources']
+ws_ = wb_.create_sheet('Data Sources')
+for c_idx, col in enumerate(df_sources.columns, 1):
+    ws_.cell(row=1, column=c_idx, value=col)
+for r_idx, row in enumerate(df_sources.itertuples(index=False), 2):
+    for c_idx, v in enumerate(row, 1):
+        ws_.cell(row=r_idx, column=c_idx, value=v)
+for cell in ws_[1]:
+    cell.fill = _P('solid', fgColor='1F4E79'); cell.font = _F(bold=True, color='FFFFFF', size=10)
+    cell.alignment = _A(wrap_text=True, vertical='center')
+ws_.freeze_panes = 'A2'
+for cc in ws_.columns:
+    m = max((len(str(c.value)) if c.value else 0) for c in cc)
+    ws_.column_dimensions[cc[0].column_letter].width = min(max(m + 2, 12), 60)
+for row in ws_.iter_rows(min_row=2):
+    for cell in row:
+        cell.font = _F(size=10); cell.alignment = _A(wrap_text=True, vertical='top')
+wb_.save(str(OUT / 'supplement_table_mouse_3.xlsx'))
+
+# Append section to docx
+from docx import Document as _D
+_doc = _D(str(OUT / 'supplement_table_mouse_3.docx'))
+_doc.add_heading('Data sources', level=2)
+add_df_table(_doc, df_sources, cap_widths=[2.6, 3.0, 2.0, 4.0, 2.0, 3.5, 5.0])
+_doc.save(str(OUT / 'supplement_table_mouse_3.docx'))
+
+# Append section to md
+_md_p = OUT / 'supplement_table_mouse_3.md'
+_md = _md_p.read_text()
+if '## Data sources' not in _md:
+    _md += '\n## Data sources\n\n'
+    _md += '| Data source | Citation | Accession | URL | Version / snapshot | Path in repo | Notes |\n'
+    _md += '|---|---|---|---|---|---|---|\n'
+    for _, r in df_sources.iterrows():
+        _md += (f"| **{r['data_source']}** | {r['citation']} | "
+                f"`{r['accession']}` | {r['url']} | {r['version_snapshot']} | "
+                f"`{r['derived_path_in_repo']}` | {r['notes']} |\n")
+    _md_p.write_text(_md)
+
 print("Wrote:")
 for p in sorted(OUT.glob("supplement_table_mouse_3*")):
     print(f"  {p.relative_to(REPO)} ({p.stat().st_size/1024:.1f} KB)")

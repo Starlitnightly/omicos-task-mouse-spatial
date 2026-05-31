@@ -101,3 +101,13 @@ GTEx Portal v8 query of significant single-tissue cis-eQTLs for 10 AD risk genes
 - Genes with 0 colon and 0 brain eQTL: 3 (SORL1, SPI1, TREM2)
 - PICALM colon vs brain: 93 vs 0 eQTL → strong **colon-specific** regulation
 - CD2AP and CR1: AD GWAS lead SNP overlaps with a colon eQTL (ad_snp_is_colon_eQTL = True) — direct evidence that the AD-risk variant could mediate effect via colon expression of these genes.
+
+## Data sources
+
+| Data source | Citation | Accession | URL | Version / snapshot | Path in repo | Notes |
+|---|---|---|---|---|---|---|
+| **GTEx Portal v8 eQTL query** | GTEx Consortium Science 2020 | `v8` | https://gtexportal.org/home/ | queried 2026-04 (snapshot) | `results/gtex_eqtl_query_results.csv` | Per (gene × tissue): n_eqtl (significant single-tissue cis-eQTLs at GTEx FDR), best_p, and ad_snp_is_eqtl flag for the Bellenguez 2022 AD GWAS lead SNP |
+| **Bellenguez 2022 AD GWAS** | Bellenguez et al. Nat Genet 2022 | `GCST90027158` | https://www.ebi.ac.uk/gwas/studies/GCST90027158 | 2022-04 (GRCh38) | `data/gwas/Bellenguez2022_AD_withN.tsv.gz (gitignored)` | Used to identify AD GWAS lead SNPs per locus and to test for eQTL overlap |
+| **SMR colocalisation pipeline** | Zhu et al. Nat Genet 2016 (SMR/HEIDI) | `-` | https://yanglab.westlake.edu.cn/software/smr/ | v1.3.1 | `results/smr_colon_AD_results.csv` | Provides lead_snp (top-eQTL SNP per gene × tissue), n_tested variants, SMR effect size, HEIDI p. Lead-SNP column in this table is sourced here. |
+| **Pipeline notebook** | This work | `-` | - | - | `notebooks/21_eqtl_coloc_analysis.ipynb (also _executed.ipynb)` | Runs the GTEx query + SMR for the 10 AD candidate genes |
+| **Coloc-ABF + SharePro** | Giambartolomei 2014; Zhang Genome Biol 2023 | `-` | https://github.com/zhwm/SharePro_coloc | SharePro v5.0.0 | `results/coloc_FULL_eqtl_results.csv + results/sharepro/{GENE}_v3_result.sharepro.txt` | Used in Fig. 4 main analysis; not directly in this table but cross-references the AD-SNP overlap calls |

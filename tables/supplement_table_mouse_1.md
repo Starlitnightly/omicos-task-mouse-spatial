@@ -181,3 +181,17 @@ Multi-source rows appear where >1 dataset contributes cells to the same organ ×
 - Largest source: PanSci (454,620 cells, 56.2%)
 - Smallest source: Hammond_microglia (9,998 cells)
 - Multi-source samples: 5 (all Brain)
+
+## Data sources
+
+| Data source | Citation | Accession | URL | Version / snapshot | Path in repo | Notes |
+|---|---|---|---|---|---|---|
+| **PanSci** | Zhang et al. Nature 2024 | `GSE247719` | https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE247719 | 2024-06 | `data/pansci/ (gitignored, see data_manifest/README.md §2.1)` | sci-RNA-seq3 mouse pan-organ aging atlas |
+| **EasySci brain** | Sziraki et al. Nature Aging 2023 | `GSE212606` | https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE212606 | 2023-08 | `data/pansci/brain/ (gitignored)` | EasySci, brain-optimised |
+| **TMS (Tabula Muris Senis)** | Schaum et al. Nature 2020 | `figshare:8273102` | https://figshare.com/articles/dataset/8273102 | 2020-07 | `data/tms/per_organ/ (gitignored)` | Smart-seq2 FACS + 10x Chromium Droplet, 23 organs × 6 ages |
+| **MCA2 (Mouse Cell Atlas 2.0)** | Han et al. Cell 2022 | `GSE153562` | https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE153562 | 2022-09 | `data/mca2/ (gitignored)` | Microwell-seq, fills aged-organ gaps |
+| **Hammond microglia** | Olah et al. Nat Commun 2020 | `GSE179358` | https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE179358 | 2020-04 | `data/microglia_aging/ (gitignored)` | 10x microglia FACS-sorted |
+| **Whole-body Array-seq mouse** | Clevenger et al. Cell 2026 | `GSE248904` | https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE248904 | 2026-02 | `data/st/ + data/st/per_organ/ (gitignored)` | Spatial reference for CMap projection |
+| **CMap (single-cell → spatial mapping)** | scripts/preprocess_new_sc.py + scripts/process_remaining_gaps.py | `-` | - | - | `models/cmap_output/{organ}/{sample}.h5ad (gitignored)` | Projects each source single-cell sample onto Clevenger 2026 spatial reference |
+| **gsMap** | Liu et al. Nature Methods 2024 | `GitHub: JianYang-Lab/gsMap` | https://github.com/JianYang-Lab/gsMap | v1.x | `models/gsmap_age_output/{sample}/ (gitignored)` | Spatial S-LDSC per (sample × annotation) Cauchy combination |
+| **Derived provenance CSV** | This work | `-` | - | - | `results/age_sample_provenance_per_source.csv` | Rebuilt by scripts/build_age_provenance_per_source.py |

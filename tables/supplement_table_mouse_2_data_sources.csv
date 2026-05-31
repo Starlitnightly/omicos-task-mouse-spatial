@@ -1,0 +1,5 @@
+data_source,citation,accession,url,version_snapshot,derived_path_in_repo,notes
+Bellenguez 2022 AD GWAS,Bellenguez et al. Nat Genet 2022,GCST90027158,https://www.ebi.ac.uk/gwas/studies/GCST90027158,2022-04 (build GRCh38),data/gwas/Bellenguez2022_AD_withN.tsv.gz (gitignored),"Ncase ≈ 90k, Ntotal ≈ 788k; converted with `gsmap format_sumstats`"
+CMap-projected multi-age atlas,Supplementary Table Mouse 1,-,-,-,"data/age_merged/age_all_organs_all_traits.h5ad (gitignored, 5.6 GB)","126 (organ × age) samples, 809,284 spots"
+gsMap quick_mode,Liu et al. Nature Methods 2024,v1.x,https://github.com/JianYang-Lab/gsMap,commit pinned in env,models/gsmap_age_output/{sample}/spatial_ldsc/{sample}_AD.csv.gz (gitignored),Per-spot AD S-LDSC χ² → p_AD column
+Per-organ summary CSVs,This work,-,-,-,results/age_organ_summary_per_age.csv + results/age_organ_summary_per_group.csv + results/age_overall_summary.csv,Pre-aggregated by tables/build_supp_table_mouse_2.py header snippet

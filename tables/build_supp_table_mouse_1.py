@@ -391,6 +391,68 @@ with open(OUT / "supplement_table_mouse_1.md", "w") as f:
     for s in stats:
         f.write(f"- {s}\n")
 
+# ------------------------------------------------------------
+# Data sources (auto-appended to CSV / XLSX / DOCX / MD)
+# ------------------------------------------------------------
+DATA_SOURCES_ROWS = [
+    ('PanSci', 'Zhang et al. Nature 2024', 'GSE247719', 'https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE247719', '2024-06', 'data/pansci/ (gitignored, see data_manifest/README.md §2.1)', 'sci-RNA-seq3 mouse pan-organ aging atlas'),
+    ('EasySci brain', 'Sziraki et al. Nature Aging 2023', 'GSE212606', 'https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE212606', '2023-08', 'data/pansci/brain/ (gitignored)', 'EasySci, brain-optimised'),
+    ('TMS (Tabula Muris Senis)', 'Schaum et al. Nature 2020', 'figshare:8273102', 'https://figshare.com/articles/dataset/8273102', '2020-07', 'data/tms/per_organ/ (gitignored)', 'Smart-seq2 FACS + 10x Chromium Droplet, 23 organs × 6 ages'),
+    ('MCA2 (Mouse Cell Atlas 2.0)', 'Han et al. Cell 2022', 'GSE153562', 'https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE153562', '2022-09', 'data/mca2/ (gitignored)', 'Microwell-seq, fills aged-organ gaps'),
+    ('Hammond microglia', 'Olah et al. Nat Commun 2020', 'GSE179358', 'https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE179358', '2020-04', 'data/microglia_aging/ (gitignored)', '10x microglia FACS-sorted'),
+    ('Whole-body Array-seq mouse', 'Clevenger et al. Cell 2026', 'GSE248904', 'https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE248904', '2026-02', 'data/st/ + data/st/per_organ/ (gitignored)', 'Spatial reference for CMap projection'),
+    ('CMap (single-cell → spatial mapping)', 'scripts/preprocess_new_sc.py + scripts/process_remaining_gaps.py', '-', '-', '-', 'models/cmap_output/{organ}/{sample}.h5ad (gitignored)', 'Projects each source single-cell sample onto Clevenger 2026 spatial reference'),
+    ('gsMap', 'Liu et al. Nature Methods 2024', 'GitHub: JianYang-Lab/gsMap', 'https://github.com/JianYang-Lab/gsMap', 'v1.x', 'models/gsmap_age_output/{sample}/ (gitignored)', 'Spatial S-LDSC per (sample × annotation) Cauchy combination'),
+    ('Derived provenance CSV', 'This work', '-', '-', '-', 'results/age_sample_provenance_per_source.csv', 'Rebuilt by scripts/build_age_provenance_per_source.py'),
+]
+DATA_SOURCES_COLS = ['data_source','citation','accession','url','version_snapshot','derived_path_in_repo','notes']
+df_sources = pd.DataFrame(DATA_SOURCES_ROWS, columns=DATA_SOURCES_COLS)
+df_sources.to_csv(OUT / 'supplement_table_mouse_1_data_sources.csv', index=False)
+
+# Add as new sheet in xlsx
+from openpyxl import load_workbook as _lw
+from openpyxl.styles import Font as _F, PatternFill as _P, Alignment as _A
+wb_ = _lw(str(OUT / 'supplement_table_mouse_1.xlsx'))
+if 'Data Sources' in wb_.sheetnames:
+    del wb_['Data Sources']
+ws_ = wb_.create_sheet('Data Sources')
+for c_idx, col in enumerate(df_sources.columns, 1):
+    ws_.cell(row=1, column=c_idx, value=col)
+for r_idx, row in enumerate(df_sources.itertuples(index=False), 2):
+    for c_idx, v in enumerate(row, 1):
+        ws_.cell(row=r_idx, column=c_idx, value=v)
+for cell in ws_[1]:
+    cell.fill = _P('solid', fgColor='1F4E79'); cell.font = _F(bold=True, color='FFFFFF', size=10)
+    cell.alignment = _A(wrap_text=True, vertical='center')
+ws_.freeze_panes = 'A2'
+for cc in ws_.columns:
+    m = max((len(str(c.value)) if c.value else 0) for c in cc)
+    ws_.column_dimensions[cc[0].column_letter].width = min(max(m + 2, 12), 60)
+for row in ws_.iter_rows(min_row=2):
+    for cell in row:
+        cell.font = _F(size=10); cell.alignment = _A(wrap_text=True, vertical='top')
+wb_.save(str(OUT / 'supplement_table_mouse_1.xlsx'))
+
+# Append section to docx
+from docx import Document as _D
+_doc = _D(str(OUT / 'supplement_table_mouse_1.docx'))
+_doc.add_heading('Data sources', level=2)
+add_df_table(_doc, df_sources, cap_widths=[2.6, 3.0, 2.0, 4.0, 2.0, 3.5, 5.0])
+_doc.save(str(OUT / 'supplement_table_mouse_1.docx'))
+
+# Append section to md
+_md_p = OUT / 'supplement_table_mouse_1.md'
+_md = _md_p.read_text()
+if '## Data sources' not in _md:
+    _md += '\n## Data sources\n\n'
+    _md += '| Data source | Citation | Accession | URL | Version / snapshot | Path in repo | Notes |\n'
+    _md += '|---|---|---|---|---|---|---|\n'
+    for _, r in df_sources.iterrows():
+        _md += (f"| **{r['data_source']}** | {r['citation']} | "
+                f"`{r['accession']}` | {r['url']} | {r['version_snapshot']} | "
+                f"`{r['derived_path_in_repo']}` | {r['notes']} |\n")
+    _md_p.write_text(_md)
+
 print(f"\nWrote:")
 for p in sorted(OUT.glob("supplement_table_mouse_1*")):
     print(f"  {p.relative_to(REPO)} ({p.stat().st_size/1024:.1f} KB)")

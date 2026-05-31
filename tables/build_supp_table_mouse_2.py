@@ -284,6 +284,64 @@ with open(OUT / "supplement_table_mouse_2.md", "w") as f:
     for s in stats:
         f.write(f"- {s}\n")
 
+
+# ------------------------------------------------------------
+# Data sources (auto-appended to CSV / XLSX / DOCX / MD)
+# ------------------------------------------------------------
+DATA_SOURCES_ROWS = [
+    ('Bellenguez 2022 AD GWAS', 'Bellenguez et al. Nat Genet 2022', 'GCST90027158', 'https://www.ebi.ac.uk/gwas/studies/GCST90027158', '2022-04 (build GRCh38)', 'data/gwas/Bellenguez2022_AD_withN.tsv.gz (gitignored)', 'Ncase ≈ 90k, Ntotal ≈ 788k; converted with `gsmap format_sumstats`'),
+    ('CMap-projected multi-age atlas', 'Supplementary Table Mouse 1', '-', '-', '-', 'data/age_merged/age_all_organs_all_traits.h5ad (gitignored, 5.6 GB)', '126 (organ × age) samples, 809,284 spots'),
+    ('gsMap quick_mode', 'Liu et al. Nature Methods 2024', 'v1.x', 'https://github.com/JianYang-Lab/gsMap', 'commit pinned in env', 'models/gsmap_age_output/{sample}/spatial_ldsc/{sample}_AD.csv.gz (gitignored)', 'Per-spot AD S-LDSC χ² → p_AD column'),
+    ('Per-organ summary CSVs', 'This work', '-', '-', '-', 'results/age_organ_summary_per_age.csv + results/age_organ_summary_per_group.csv + results/age_overall_summary.csv', 'Pre-aggregated by tables/build_supp_table_mouse_2.py header snippet'),
+]
+DATA_SOURCES_COLS = ['data_source','citation','accession','url','version_snapshot','derived_path_in_repo','notes']
+df_sources = pd.DataFrame(DATA_SOURCES_ROWS, columns=DATA_SOURCES_COLS)
+df_sources.to_csv(OUT / 'supplement_table_mouse_2_data_sources.csv', index=False)
+
+# Add as new sheet in xlsx
+from openpyxl import load_workbook as _lw
+from openpyxl.styles import Font as _F, PatternFill as _P, Alignment as _A
+wb_ = _lw(str(OUT / 'supplement_table_mouse_2.xlsx'))
+if 'Data Sources' in wb_.sheetnames:
+    del wb_['Data Sources']
+ws_ = wb_.create_sheet('Data Sources')
+for c_idx, col in enumerate(df_sources.columns, 1):
+    ws_.cell(row=1, column=c_idx, value=col)
+for r_idx, row in enumerate(df_sources.itertuples(index=False), 2):
+    for c_idx, v in enumerate(row, 1):
+        ws_.cell(row=r_idx, column=c_idx, value=v)
+for cell in ws_[1]:
+    cell.fill = _P('solid', fgColor='1F4E79'); cell.font = _F(bold=True, color='FFFFFF', size=10)
+    cell.alignment = _A(wrap_text=True, vertical='center')
+ws_.freeze_panes = 'A2'
+for cc in ws_.columns:
+    m = max((len(str(c.value)) if c.value else 0) for c in cc)
+    ws_.column_dimensions[cc[0].column_letter].width = min(max(m + 2, 12), 60)
+for row in ws_.iter_rows(min_row=2):
+    for cell in row:
+        cell.font = _F(size=10); cell.alignment = _A(wrap_text=True, vertical='top')
+wb_.save(str(OUT / 'supplement_table_mouse_2.xlsx'))
+
+# Append section to docx
+from docx import Document as _D
+_doc = _D(str(OUT / 'supplement_table_mouse_2.docx'))
+_doc.add_heading('Data sources', level=2)
+add_df_table(_doc, df_sources, cap_widths=[2.6, 3.0, 2.0, 4.0, 2.0, 3.5, 5.0])
+_doc.save(str(OUT / 'supplement_table_mouse_2.docx'))
+
+# Append section to md
+_md_p = OUT / 'supplement_table_mouse_2.md'
+_md = _md_p.read_text()
+if '## Data sources' not in _md:
+    _md += '\n## Data sources\n\n'
+    _md += '| Data source | Citation | Accession | URL | Version / snapshot | Path in repo | Notes |\n'
+    _md += '|---|---|---|---|---|---|---|\n'
+    for _, r in df_sources.iterrows():
+        _md += (f"| **{r['data_source']}** | {r['citation']} | "
+                f"`{r['accession']}` | {r['url']} | {r['version_snapshot']} | "
+                f"`{r['derived_path_in_repo']}` | {r['notes']} |\n")
+    _md_p.write_text(_md)
+
 print("Wrote:")
 for p in sorted(OUT.glob("supplement_table_mouse_2*")):
     print(f"  {p.relative_to(REPO)} ({p.stat().st_size/1024:.1f} KB)")
