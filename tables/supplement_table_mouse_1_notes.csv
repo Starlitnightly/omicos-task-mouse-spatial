@@ -1,0 +1,7 @@
+topic,note
+CMap projection,Each single-cell sample is mapped onto the whole-body spatial reference (GSE248904 CTRL replicate 1) using CMap classification + spot assignment. See scripts/preprocess_new_sc.py and scripts/process_remaining_gaps.py. A spot-classification confidence (CMAP_quality) is retained per cell.
+gsMap input,Each (organ × age × source) projected h5ad is one input to `gsmap quick_mode`; outputs include per-spot AD -log10(p) and per-annotation Cauchy combination.
+Multi-source Brain samples,"5 Brain samples (Brain_3m, Brain_6m, Brain_12m, Brain_18m, Brain_24m) each combine ≥2 sources to maximise cell-type coverage: PanSci/EasySci supply non-microglia neurons; Hammond and TMS add microglia depth; MCA2 fills aged gaps. See Fig. 4c pie-matrix in notebooks/paper_figure.ipynb."
+Why 15 organs and not 16,Lymph_Node spatial spots exist in GSE248904 but no aged single-cell dataset covers lymph node directly; lymph node was excluded from the multi-age atlas (still appears in the 6-week whole-body baseline).
+Why 1–30 mo and not 1–32 mo,TMS droplet covers up to 30 m; no public single-cell mouse atlas reliably covers 31–32 months for the organs analysed here.
+Provenance script,scripts/build_age_provenance_per_source.py rebuilds results/age_sample_provenance_per_source.csv from raw obs metadata + CMap output paths.

@@ -1,0 +1,6 @@
+rank,source,paper,accession,assay,organs_covered,ages_offered,preprocessing_status
+1,PanSci,Zhang et al. Nature 2024,GSE247719,sci-RNA-seq3 (PanSci),"Kidney, Lung, Heart, Liver, Muscle, Stomach, BAT, iWAT, gWAT, Ileum, Colon, Pancreas, Skin, Thymus","3, 6, 12, 16, 23 months",Curated cellType + Lineage + Sub_cell_type annotations from source
+2,EasySci,Sziraki et al. Nature Aging 2023,GSE212606,"EasySci (sci-RNA-seq3 variant, brain-optimised)",Brain (whole),"3, 6, 21 months",Main_cell_type + Sub_cluster from source
+3,TMS,Schaum et al. Nature 2020 (Tabula Muris Senis),figshare:8273102 (TMS),Smart-seq2 (FACS) + 10x Chromium (Droplet),"23 organs (BAT, Bone Marrow, Brain Myeloid/NonMyeloid, Heart, Kidney, Liver, Lung, Pancreas, Spleen, Skin, Muscle, Stomach, Colon, Thymus, Trachea, …)","1, 3, 18, 21, 24, 30 months",cell_ontology_class from source (Tabula Muris cell ontology)
+4,MCA2,Han et al. Cell 2022 (Mouse Cell Atlas 2.0),GSE153562,Microwell-seq (MCA2),"Stomach, Ileum, Spleen, Thymus (mid-late life gaps for TMS organs)","6, 12, 18, 21, 24 months (per-organ subset)",leiden clusters with marker-based manual annotation
+5,Hammond_microglia,Olah et al. Nature Communications 2020,GSE179358,"10x Chromium (microglia FACS-sorted, brain)",Brain (microglia only),"6, 12, 18 months",cellType=microglial cell (single-cell-type focus)

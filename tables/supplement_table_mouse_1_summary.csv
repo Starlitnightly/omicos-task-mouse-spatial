@@ -1,0 +1,7 @@
+source,samples,distinct_organs,total_cells,age_range,pct_of_atlas
+PanSci,47,10,454620,3–23 mo,56.18
+TMS,65,13,207717,1–30 mo,25.67
+MCA2,12,6,110309,6–24 mo,13.63
+EasySci,3,1,26640,3–21 mo,3.29
+Hammond_microglia,4,1,9998,6–24 mo,1.24
+Total,126,15,809284,1–30 mo,100.0
