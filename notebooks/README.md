@@ -29,7 +29,8 @@ Removing any of these notebooks would break the analysis logic — keep the full
 | `S07_cross_species.ipynb` | Figure | 7 | **3** | Supplementary Figure S7: Cross-Species Validation |
 | **Phase 5 — Master** | | | | |
 | `ng_fig_gsmap_eqtl_verify.ipynb` | Figure | 36 | **19** | Whole-Body Spatial Mapping of AD Genetic Risk — Nature Genetics Figures (v2) |
-| `paper_figure.ipynb` | Figure | 43 | **25** |  |
+| `paper_figure.ipynb` | Figure | 43 | **25** | Paper figure |
+| `paper_figure_supp.ipynb` | Figure | 2 | **1** | Supplementary / extended-data figures (Para 3 S3: organ-wise Young vs Old effect size with CI + sample-level variability) |
 
 ## Re-running pipeline notebooks
 
