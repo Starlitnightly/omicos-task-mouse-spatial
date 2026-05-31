@@ -1,0 +1,2 @@
+analysis,universe,universe_size,test_set,test_set_size_present,observed_mean_PCC,null_mean_PCC,null_sd_PCC,z_score,empirical_p_one_tailed,n_permutations,randomization_scheme,spatial_scoring_source
+permutation: endocytic AD gene set vs random AD genes in Colon,AD_GENES_55 (Bellenguez 2022 + classical hits),55,"ADAM10, APP, CD2AP, CR1, PICALM, PSEN1, SORL1",7,0.2835,0.0841,0.0417,4.789,1e-05,100000,sample-without-replacement from universe,Colon_CTRL1 gsMap Gene_Diagnostic_Info.csv (PCC of gene expression vs per-spot AD score)
