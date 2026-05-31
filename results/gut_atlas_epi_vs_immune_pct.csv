@@ -1,0 +1,15 @@
+gene,source,pct_epi_cells,pct_immune_cells,n_epi_cells,n_immune_cells
+PICALM,Burclaff2022 (human colon epi-enriched),41.912611893999824,31.028446389496718,11283,2285
+CD2AP,Burclaff2022 (human colon epi-enriched),49.534698218558894,44.945295404814004,11283,2285
+ADAM10,Burclaff2022 (human colon epi-enriched),40.547726668439246,38.24945295404814,11283,2285
+CR1,Burclaff2022 (human colon epi-enriched),27.501551005938136,52.91028446389496,11283,2285
+APP,Burclaff2022 (human colon epi-enriched),52.08721084817868,63.85120350109409,11283,2285
+SORL1,Burclaff2022 (human colon epi-enriched),43.69405300008863,35.36105032822757,11283,2285
+PSEN1,Burclaff2022 (human colon epi-enriched),34.76025879641939,23.194748358862142,11283,2285
+PICALM,Smillie2019 (human colon immune-enriched),,10.233203608169667,0,33147
+CD2AP,Smillie2019 (human colon immune-enriched),,10.019006244909042,0,33147
+ADAM10,Smillie2019 (human colon immune-enriched),,12.646695025190816,0,33147
+CR1,Smillie2019 (human colon immune-enriched),,3.8736537243189426,0,33147
+APP,Smillie2019 (human colon immune-enriched),,8.528675294898482,0,33147
+SORL1,Smillie2019 (human colon immune-enriched),,9.460886354722902,0,33147
+PSEN1,Smillie2019 (human colon immune-enriched),,8.196820225058074,0,33147
